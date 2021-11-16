@@ -1,0 +1,63 @@
+<div class="block_edition">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input type="text" matInput formControlName="title">
+      <mat-error *ngIf="form.get('title').hasError('required')">
+        Title <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea type="text" matInput formControlName="description"></textarea>
+      <mat-error *ngIf="form.get('description').hasError('required')">
+        Description <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      mat-button
+      color="warn"
+      *ngIf="check"
+    >
+      ADD
+    </button>
+    <button
+      type="button"
+      [disabled]="form.invalid"
+      mat-raised-button
+      color="primary"
+      *ngIf="!check"
+      (click)="update()"
+    >
+      Update
+    </button>
+  </form>
+</div>
+<div class="search">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Search</mat-label>
+    <input type="text" matInput [(ngModel)]="search">
+  </mat-form-field>
+</div>
+<div class="posts">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let blog of blogs | search:search, let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ blog.title }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="details">
+        <div>
+          <div>{{ blog.description }}</div>
+          <strong>{{ blog.date | date: 'HH:mm, MM.dd.yy' }}</strong></div>
+        <div class="button_group">
+          <button mat-button color="primary" (click)="edit(blog)">Edit</button>
+          <button mat-button color="accent" (click)="delete(i)">Delete</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

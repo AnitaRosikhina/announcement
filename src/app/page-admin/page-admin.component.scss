@@ -1,0 +1,31 @@
+.block_edition {
+  width: 70%;
+  margin: 20px auto;
+
+ form {
+   display: flex;
+   flex-direction: column;
+ }
+}
+
+.search {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.posts {
+  width: 70%;
+  margin: 0 auto;
+
+  .details {
+    display: flex;
+    justify-content: space-between;
+
+    .button_group {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+}
+
+
